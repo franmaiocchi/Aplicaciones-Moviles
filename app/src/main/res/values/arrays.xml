@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="STS_pasivos">
+        <item>Coax 12</item>
+        <item>Coax 15</item>
+        <item>Cantata</item>
+        <item>Sonata</item>
+        <item>Concerto TOP</item>
+        <item>Concerto miniSUB</item>
+        <item>Concerto SUB</item>
+        <item>Concerto infraSUB</item>
+        <item>Linea V5</item>
+        <item>Linea V10</item>
+        <item>Linea V10i</item>
+    </string-array>
+</resources>

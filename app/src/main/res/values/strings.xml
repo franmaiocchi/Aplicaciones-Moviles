@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PrimerParcial</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="boton_login">LOGIN</string>
+    <string name="lbl_login">LOGIN</string>
+    <string name="tlb_settings">Settings</string>
+</resources>
