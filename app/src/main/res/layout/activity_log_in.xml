@@ -31,14 +31,14 @@
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
+        android:layout_width="114dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/btnloginshape"
-        android:textColor="#FFFFFF"
         android:layout_marginBottom="83dp"
-        android:text="@string/boton_login" />
+        android:background="@drawable/btnloginshape"
+        android:text="@string/boton_login"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/lblLogin"
@@ -53,7 +53,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="118dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/sts" />

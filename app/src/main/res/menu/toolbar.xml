@@ -5,5 +5,6 @@
     <item
         android:id="@+id/tlb_settings"
         android:title="@string/tlb_settings"
+        android:icon="@drawable/ic_settings"
         app:showAsAction="ifRoom" />
 </menu>
