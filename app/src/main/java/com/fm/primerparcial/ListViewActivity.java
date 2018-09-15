@@ -9,13 +9,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class ListViewActivity extends AppCompatActivity
 {
-    public ListView lstStsPassive;
     public Toolbar myToolbar;
+    ExpandableListAdapter listAdapter;
+    ExpandableListView expListView;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
+    HashMap<String, List<Integer>> icons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -23,62 +32,30 @@ public class ListViewActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
 
-        // Creo el adaptador para el listView
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.STS_pasivos, android.R.layout.simple_list_item_1);
-
         // Referencio views
-        lstStsPassive = findViewById(R.id.lstSTS);
+        expListView = findViewById(R.id.lstSTS);
         myToolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        // Cargo el adaptador al listView
-        lstStsPassive.setAdapter(adapter);
+        // preparing list data
+        prepareListData();
+        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild, icons);
 
-        lstStsPassive.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        // Cargo el adaptador al listView
+        expListView.setAdapter(listAdapter);
+
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
         {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
             {
-                switch (parent.getItemAtPosition(position).toString())
-                {
-                    case "Coax 12":
-                        Toast.makeText(getApplicationContext(), "Coax 12", Toast.LENGTH_LONG).show();
-                        break;
-                    case "Coax 15":
-                        Toast.makeText(getApplicationContext(), "Coax 15", Toast.LENGTH_LONG).show();
-                        break;
-                    case "Cantata":
-                        Toast.makeText(getApplicationContext(), "Cantata", Toast.LENGTH_LONG).show();
-                        break;
-                    case "Sonata":
-                        Toast.makeText(getApplicationContext(), "Sonata", Toast.LENGTH_LONG).show();
-                        break;
-                    case "Concerto TOP":
-                        Toast.makeText(getApplicationContext(), "Concerto TOP", Toast.LENGTH_LONG).show();
-                        break;
-                    case "Concerto miniSUB":
-                        Toast.makeText(getApplicationContext(), "Concerto miniSUB", Toast.LENGTH_LONG).show();
-                        break;
-                    case "Concerto SUB":
-                        Toast.makeText(getApplicationContext(), "Concerto SUB", Toast.LENGTH_LONG).show();
-                        break;
-                    case "Concerto infraSUB":
-                        Toast.makeText(getApplicationContext(), "Concerto infraSUB", Toast.LENGTH_LONG).show();
-                        break;
-                    case "Linea V5":
-                        Toast.makeText(getApplicationContext(), "Linea V5", Toast.LENGTH_LONG).show();
-                        break;
-                    case "Linea V10":
-                        Toast.makeText(getApplicationContext(), "Linea V10", Toast.LENGTH_LONG).show();
-                        break;
-                    case "Linea V10i":
-                        Toast.makeText(getApplicationContext(), "Linea V10i", Toast.LENGTH_LONG).show();
-                        break;
-                }
+                Toast.makeText(getApplicationContext(), listDataHeader.get(groupPosition) + " : " + listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
+                return false;
             }
         });
+
         myToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener()
         {
             @Override
@@ -93,6 +70,66 @@ public class ListViewActivity extends AppCompatActivity
                 return true;
             }
         });
+    }
+
+    private void prepareListData()
+    {
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
+        icons = new HashMap<String, List<Integer>>();
+
+        // Adding child data
+        listDataHeader.add("Monitores");
+        listDataHeader.add("Point Source");
+        listDataHeader.add("Subwoofer");
+        listDataHeader.add("Line Array");
+
+        // Adding child data
+        List<String> Monitores = new ArrayList<String>();
+        List<Integer> Monitores_icons = new ArrayList<Integer>();
+        Monitores.add("Coax 12");
+        Monitores_icons.add(R.mipmap.ic_coax12);
+        Monitores.add("Coax 15");
+        Monitores_icons.add(R.mipmap.ic_coax15);
+
+
+        List<String> PointSource = new ArrayList<String>();
+        List<Integer> PointSource_icons = new ArrayList<Integer>();
+        PointSource.add("Cantata");
+        PointSource_icons.add(R.mipmap.ic_cantata);
+        PointSource.add("Sonata");
+        PointSource_icons.add(R.mipmap.ic_sonata);
+        PointSource.add("Concerto TOP");
+        PointSource_icons.add(R.mipmap.ic_contop);
+
+
+        List<String> Subwoofer = new ArrayList<String>();
+        List<Integer> Subwoofer_icons = new ArrayList<Integer>();
+        Subwoofer.add("Concerto miniSUB");
+        Subwoofer_icons.add(R.mipmap.ic_mini);
+        Subwoofer.add("Concerto SUB");
+        Subwoofer_icons.add(R.mipmap.ic_consub);
+        Subwoofer.add("Concerto infraSUB");
+        Subwoofer_icons.add(R.mipmap.ic_infra);
+
+        List<String> LineArray = new ArrayList<String>();
+        List<Integer> LineArray_icons = new ArrayList<Integer>();
+        LineArray.add("Linea V5");
+        LineArray_icons.add(R.mipmap.ic_v5);
+        LineArray.add("Linea V10");
+        LineArray_icons.add(R.mipmap.ic_v10);
+        LineArray.add("Linea V10i");
+        LineArray_icons.add(R.mipmap.ic_v10i);
+
+        listDataChild.put(listDataHeader.get(0), Monitores); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), PointSource);
+        listDataChild.put(listDataHeader.get(2), Subwoofer);
+        listDataChild.put(listDataHeader.get(3), LineArray);
+
+        icons.put(listDataHeader.get(0), Monitores_icons);
+        icons.put(listDataHeader.get(1), PointSource_icons);
+        icons.put(listDataHeader.get(2), Subwoofer_icons);
+        icons.put(listDataHeader.get(3), LineArray_icons);
     }
 
     @Override
