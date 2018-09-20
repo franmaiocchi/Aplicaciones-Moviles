@@ -124,67 +124,6 @@ public class ListViewActivity extends AppCompatActivity
         }
 
     }
-
-//    private void prepareListData_2()
-//    {
-//        listDataHeader = new ArrayList<String>();
-//        listDataChild = new HashMap<String, List<String>>();
-//        icons = new HashMap<String, List<Integer>>();
-//
-//        // Adding child data
-//        listDataHeader.add("Monitores");
-//        listDataHeader.add("Point Source");
-//        listDataHeader.add("Subwoofer");
-//        listDataHeader.add("Line Array");
-//
-//        // Adding child data
-//        List<String> Monitores = new ArrayList<String>();
-//        List<Integer> Monitores_icons = new ArrayList<Integer>();
-//        Monitores.add("Coax 12");
-//        Monitores_icons.add(R.mipmap.ic_coax12);
-//        Monitores.add("Coax 15");
-//        Monitores_icons.add(R.mipmap.ic_coax15);
-//
-//
-//        List<String> PointSource = new ArrayList<String>();
-//        List<Integer> PointSource_icons = new ArrayList<Integer>();
-//        PointSource.add("Cantata");
-//        PointSource_icons.add(R.mipmap.ic_cantata);
-//        PointSource.add("Sonata");
-//        PointSource_icons.add(R.mipmap.ic_sonata);
-//        PointSource.add("Concerto TOP");
-//        PointSource_icons.add(R.mipmap.ic_contop);
-//
-//
-//        List<String> Subwoofer = new ArrayList<String>();
-//        List<Integer> Subwoofer_icons = new ArrayList<Integer>();
-//        Subwoofer.add("Concerto miniSUB");
-//        Subwoofer_icons.add(R.mipmap.ic_mini);
-//        Subwoofer.add("Concerto SUB");
-//        Subwoofer_icons.add(R.mipmap.ic_consub);
-//        Subwoofer.add("Concerto infraSUB");
-//        Subwoofer_icons.add(R.mipmap.ic_infra);
-//
-//        List<String> LineArray = new ArrayList<String>();
-//        List<Integer> LineArray_icons = new ArrayList<Integer>();
-//        LineArray.add("Linea V5");
-//        LineArray_icons.add(R.mipmap.ic_v5);
-//        LineArray.add("Linea V10");
-//        LineArray_icons.add(R.mipmap.ic_v10);
-//        LineArray.add("Linea V10i");
-//        LineArray_icons.add(R.mipmap.ic_v10i);
-//
-//        listDataChild.put(listDataHeader.get(0), Monitores); // Header, Child data
-//        listDataChild.put(listDataHeader.get(1), PointSource);
-//        listDataChild.put(listDataHeader.get(2), Subwoofer);
-//        listDataChild.put(listDataHeader.get(3), LineArray);
-//
-//        icons.put(listDataHeader.get(0), Monitores_icons);
-//        icons.put(listDataHeader.get(1), PointSource_icons);
-//        icons.put(listDataHeader.get(2), Subwoofer_icons);
-//        icons.put(listDataHeader.get(3), LineArray_icons);
-//    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {

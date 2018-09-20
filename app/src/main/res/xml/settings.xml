@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="Categoría 1">
+    <PreferenceCategory android:title="Tipografía">
         <CheckBoxPreference
-            android:key="opcion1"
-            android:title="Preferencia 1"
-            android:summary="Descripción de la preferencia 1" />
+            android:key="cursiva"
+            android:title="Cursiva"
+            android:summary="Cambie el tipo de letra a cursiva" />
+        <CheckBoxPreference
+            android:key="bold"
+            android:title="Bold"
+            android:summary="Cambie el tipo de letra a negrita" />
         <EditTextPreference
-            android:key="opcion2"
-            android:title="Preferencia 2"
-            android:summary="Descripción de la preferencia 2"
-            android:dialogTitle="Introduce valor" />
+            android:key="tamaño"
+            android:title="Tamaño"
+            android:summary="Cambie el tamaño de letra"
+            android:dialogTitle="Ingrese el tamaño de letra deseado" />
+        <ListPreference
+            android:key="color"
+            android:title="Color"
+            android:summary="Seleccione el color de la letra"
+            android:dialogTitle="Seleccione el color"
+            android:entries="@array/Colores"
+            android:entryValues="@array/ColoresValue" />
     </PreferenceCategory>
-
 </PreferenceScreen>
