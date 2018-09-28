@@ -59,7 +59,10 @@ public class ListViewActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                Toast.makeText(getApplicationContext(), ((Articulo)parent.getItemAtPosition(position)).getArticulo(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ListViewActivity.this, DetailActivity.class);
+                intent.putExtra("MODELO", ((Articulo)parent.getItemAtPosition(position)).getArticulo());
+                startActivity(intent);
+                //Toast.makeText(getApplicationContext(), ((Articulo)parent.getItemAtPosition(position)).getArticulo(), Toast.LENGTH_SHORT).show();
             }
         });
 
