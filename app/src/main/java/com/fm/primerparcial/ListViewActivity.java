@@ -1,18 +1,22 @@
 package com.fm.primerparcial;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,12 +28,10 @@ import static com.fm.primerparcial.STSSQLiteHelper.DATABASE_NAME;
 public class ListViewActivity extends AppCompatActivity
 {
     public Toolbar myToolbar;
-    ExpandableListAdapter listAdapter;
-    ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
-    HashMap<String, List<Integer>> icons;
+    ListView listView;
     public SQLiteDatabase db;
+
+    List<Articulo> listViewItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,29 +40,29 @@ public class ListViewActivity extends AppCompatActivity
         setContentView(R.layout.activity_list_view);
 
         // Referencio views
-        expListView = findViewById(R.id.lstSTS);
+        listView = findViewById(R.id.lstSTS);
         myToolbar = findViewById(R.id.toolbar);
 
         // Seteo la toolbar
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        // Bajo de la base los datos para la expandable listview
+        // Bajo de la base los datos para la listview
         prepareListData();
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild, icons);
+        AdaptadorArticulos adaptador = new AdaptadorArticulos(this, listViewItems);
 
         // Cargo el adaptador al listView
-        expListView.setAdapter(listAdapter);
+        listView.setAdapter(adaptador);
 
-        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                Toast.makeText(getApplicationContext(), listDataHeader.get(groupPosition) + " : " + listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
-                return false;
+                Toast.makeText(getApplicationContext(), ((Articulo)parent.getItemAtPosition(position)).getArticulo(), Toast.LENGTH_SHORT).show();
             }
         });
+
 
         myToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener()
         {
@@ -80,54 +82,50 @@ public class ListViewActivity extends AppCompatActivity
 
     private void prepareListData()
     {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
-        icons = new HashMap<String, List<Integer>>();
+        listViewItems = new ArrayList<Articulo>();
 
         //Abrimos la base de datos 'DBUsuarios' en modo escritura
         STSSQLiteHelper helper = new STSSQLiteHelper(this);
 
         db = helper.getWritableDatabase();
         // Columnas que quiero traer
-        String[] projection = new String[]{DBStructure.Table_Familias.COLUMN_NAME_NOMBRE};
+        String[] projection = new String[]{DBStructure.Table_Productos.COLUMN_NAME_MODELO, DBStructure.Table_Productos.COLUMN_NAME_ICON};
 
-        Cursor cursor = db.query(DBStructure.Table_Familias.TABLE_NAME, projection, null, null, null, null, null);
-
+        Cursor cursor = db.query(DBStructure.Table_Productos.TABLE_NAME, projection, null, null, null, null, null);
         if(cursor.moveToFirst())
         {
             do
             {
-                listDataHeader.add(cursor.getString(0));
+                Articulo aux = new Articulo(cursor.getString(0), cursor.getInt(1));
+                listViewItems.add(aux);
             } while (cursor.moveToNext());
         }
-        // Columnas que quiero traer
-        projection = new String[] {DBStructure.Table_Productos.COLUMN_NAME_MODELO, DBStructure.Table_Productos.COLUMN_NAME_PADRE, DBStructure.Table_Productos.COLUMN_NAME_ICON};
-        // Columnas a evaluar
-        String selection = DBStructure.Table_Productos.COLUMN_NAME_PADRE + " = ?";
-
-        for (int i = 0; i < listDataHeader.size(); i++)
-        {
-            String[] selectionArgs = {listDataHeader.get(i)};
-            cursor = db.query(DBStructure.Table_Productos.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
-            if (cursor.moveToFirst())
-            {
-                List<String> aux_modelo = new ArrayList<String>();
-                List<Integer> aux_icons = new ArrayList<Integer>();
-                do
-                {
-                    aux_modelo.add(cursor.getString(0));
-                    aux_icons.add(cursor.getInt(2));
-                } while (cursor.moveToNext());
-                listDataChild.put(listDataHeader.get(i), aux_modelo);
-                icons.put(listDataHeader.get(i), aux_icons);
-            }
-        }
-
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
+    }
+    class AdaptadorArticulos extends ArrayAdapter<Articulo>
+    {
+        private List<Articulo> _datos;
+        public AdaptadorArticulos(Context context, List<Articulo> datos)
+        {
+            super(context, R.layout.list_item, datos);
+            this._datos = datos;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            View v = inflater.inflate(R.layout.list_item, null);
+            final int icon = (int)this._datos.get(position).getIcon();
+            TextView lblNombre = (TextView)v.findViewById(R.id.lblListItem);
+            lblNombre.setText(this._datos.get(position).getArticulo());
+            lblNombre.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
+            return(v);
+        }
     }
 }
