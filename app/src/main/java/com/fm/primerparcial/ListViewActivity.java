@@ -1,12 +1,16 @@
 package com.fm.primerparcial;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,6 +35,7 @@ public class ListViewActivity extends AppCompatActivity
     public Toolbar myToolbar;
     ListView listView;
     public SQLiteDatabase db;
+    public FloatingActionButton btnFloating;
 
     List<Articulo> listViewItems;
 
@@ -42,6 +48,10 @@ public class ListViewActivity extends AppCompatActivity
         // Referencio views
         listView = findViewById(R.id.lstSTS);
         myToolbar = findViewById(R.id.toolbar);
+        btnFloating = findViewById(R.id.btnFloating);
+
+        // Cambio el color del boton
+        btnFloating.setBackgroundColor(getResources().getColor(R.color.stsPDark));
 
         // Seteo la toolbar
         setSupportActionBar(myToolbar);
@@ -66,7 +76,6 @@ public class ListViewActivity extends AppCompatActivity
             }
         });
 
-
         myToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener()
         {
             @Override
@@ -77,8 +86,19 @@ public class ListViewActivity extends AppCompatActivity
                     case R.id.tlb_settings:
                         startActivity(new Intent(ListViewActivity.this, SettingsActivity.class));
                         break;
+                    case R.id.tlb_add:
+                        Toast.makeText(ListViewActivity.this, "Aprete el boton add", Toast.LENGTH_SHORT).show();
+                        break;
                 }
                 return true;
+            }
+        });
+
+        btnFloating.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
             }
         });
     }

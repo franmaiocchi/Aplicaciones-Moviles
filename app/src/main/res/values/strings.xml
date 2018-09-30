@@ -27,4 +27,7 @@ Su conexionado frontal permite que el cableado del mismo sea aún más accesible
     <string name="lbl_tech_spec12">DIMENSIONES</string>
     <string name="lbl_tech_spec13">PESO</string>
 
+    <string name="add_modelo">Ingrese el nombre del modelo</string>
+    <string name="add_descripcion">Ingrese la descripcion del modelo</string>
+
 </resources>

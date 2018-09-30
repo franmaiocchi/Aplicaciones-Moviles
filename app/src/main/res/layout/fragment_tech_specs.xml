@@ -174,6 +174,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="Dos vías pasivas, Full Range"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent" />
@@ -186,6 +187,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="68 Hz – 18 kHz +/- 3dB"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/lblTipo" />
@@ -197,6 +199,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="1 x 1,4″ driver / 1 x 12″ woofer en configuración coaxial"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/lblTechSpec3" />
@@ -209,6 +212,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="100 dB watt/metro"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/lblParlantes" />
@@ -220,6 +224,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="700 W programa continuo"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/lblTechSpec5" />
@@ -231,6 +236,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="8 ohm nominal"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/lblTechSpec6" />
@@ -243,6 +249,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="Reflector de bajos, multi ángulo monitor, 30°, 60° o 90°"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/lblImpedancia" />
@@ -255,6 +262,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="Cubierta c/poliurea, texturada, azul-gris oscuro"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/lblGabinete" />
@@ -267,6 +275,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="Negra, chapa hierro perforado"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/lblTerminacion" />
@@ -279,6 +288,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="Vaso de 35 mm"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/lblRejaDeProteccion" />
@@ -291,6 +301,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="2 x Neutrik Speakon"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/lblAnclajes" />
@@ -303,6 +314,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="(Al) 380mm x (An) 380mm x (P) 495mm"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/lblConectores" />
@@ -315,6 +327,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="15 kg"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/lblDimensiones" />

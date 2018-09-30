@@ -21,11 +21,11 @@ public class DetailActivity extends AppCompatActivity
         setContentView(R.layout.activity_detail);
 
         Intent intent = getIntent();
-        String modeloToolbar = intent.getExtras().getString("MODELO");
+        String modelo = intent.getExtras().getString("MODELO");
 
         toolbar2 = findViewById(R.id.appbar);
         setSupportActionBar(toolbar2);
-        getSupportActionBar().setTitle(modeloToolbar);
+        getSupportActionBar().setTitle(modelo);
 
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
