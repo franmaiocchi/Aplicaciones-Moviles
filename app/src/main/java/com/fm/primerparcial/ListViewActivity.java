@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -26,6 +27,11 @@ import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.shashank.sony.fancydialoglib.Animation;
+import com.shashank.sony.fancydialoglib.FancyAlertDialog;
+import com.shashank.sony.fancydialoglib.FancyAlertDialogListener;
+import com.shashank.sony.fancydialoglib.Icon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -175,32 +181,51 @@ public class ListViewActivity extends AppCompatActivity
         super.onCreateContextMenu(menu, v, menuInfo);
 
         MenuInflater inflater = getMenuInflater();
-
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-
-        Articulo obj = (Articulo) listView.getItemAtPosition(info.position);
-
-        menu.setHeaderTitle(obj.getArticulo());
-
+        menu.setHeaderTitle(((Articulo) listView.getItemAtPosition(info.position)).getArticulo());
         inflater.inflate(R.menu.menu_ctx_list, menu);
     }
     @Override
-    public boolean onContextItemSelected(MenuItem item)
+    public boolean onContextItemSelected(final MenuItem item)
     {
-
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-
         switch (item.getItemId()) {
             case R.id.ctxModificar:
                 Toast.makeText(this, "Se modificaria", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.ctxEliminar:
-                // Lo borro de la base
-                String selection = DBStructure.Table_Productos.COLUMN_NAME_MODELO + " LIKE ?";
-                String[] selectionArgs = {((Articulo)listView.getItemAtPosition(info.position)).getArticulo()};
-                db.delete(DBStructure.Table_Productos.TABLE_NAME, selection, selectionArgs);
-                // Lo borro del adaptador
-                adaptador.remove((Articulo) listView.getItemAtPosition(info.position));
+                final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                new FancyAlertDialog.Builder(this)
+                        .setTitle(((Articulo)listView.getItemAtPosition(info.position)).getArticulo())
+                        .setBackgroundColor(Color.parseColor("#EB2229"))  //Don't pass R.color.colorvalue
+                        .setMessage("¿Esta seguro que quiere eliminarlo?")
+                        .setNegativeBtnText("Cancelar")
+                        .setPositiveBtnBackground(Color.parseColor("#EB2229"))  //Don't pass R.color.colorvalue
+                        .setPositiveBtnText("Eliminar")
+                        .setNegativeBtnBackground(Color.parseColor("#FFA9A7A8"))  //Don't pass R.color.colorvalue
+                        .setAnimation(Animation.POP)
+                        .isCancellable(true)
+                        .setIcon(R.drawable.ic_delete_white,Icon.Visible)
+                        .OnPositiveClicked(new FancyAlertDialogListener() {
+                            @Override
+                            public void OnClick()
+                            {
+                                // Lo borro de la base
+                                String selection = DBStructure.Table_Productos.COLUMN_NAME_MODELO + " LIKE ?";
+                                String[] selectionArgs = {((Articulo)listView.getItemAtPosition(info.position)).getArticulo()};
+                                db.delete(DBStructure.Table_Productos.TABLE_NAME, selection, selectionArgs);
+                                Toast.makeText(getApplicationContext(),((Articulo)listView.getItemAtPosition(info.position)).getArticulo() + " eliminado",Toast.LENGTH_SHORT).show();
+                                // Lo borro del adaptador
+                                adaptador.remove((Articulo) listView.getItemAtPosition(info.position));
+                            }
+                        })
+                        .OnNegativeClicked(new FancyAlertDialogListener() {
+                            @Override
+                            public void OnClick()
+                            {
+                                Toast.makeText(getApplicationContext(),"Eliminación cancelada",Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .build();
                 return true;
             default:
                 return super.onContextItemSelected(item);
