@@ -6,13 +6,16 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +67,9 @@ public class ListViewActivity extends AppCompatActivity
         // Cargo el adaptador al listView
         listView.setAdapter(adaptador);
 
+        // Asocio el menu contextual al listview
+        registerForContextMenu(listView);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -99,6 +105,7 @@ public class ListViewActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                startActivity(new Intent(ListViewActivity.this, AddArticuloActivity.class));
             }
         });
     }
@@ -149,6 +156,48 @@ public class ListViewActivity extends AppCompatActivity
             lblNombre.setText(this._datos.get(position).getArticulo());
             lblNombre.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
             return(v);
+        }
+
+        @Override
+        public Articulo getItem(int position)
+        {
+            return super.getItem(position);
+        }
+        public String getNombreArticulo(int position)
+        {
+            return super.getItem(position).getArticulo();
+        }
+    }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        MenuInflater inflater = getMenuInflater();
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+
+        Articulo obj = (Articulo) listView.getItemAtPosition(info.position);
+
+        menu.setHeaderTitle(obj.getArticulo());
+
+        inflater.inflate(R.menu.menu_ctx_list, menu);
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId()) {
+            case R.id.ctxModificar:
+                Toast.makeText(this, "Se modificaria", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.ctxEliminar:
+                Toast.makeText(this, "Se eliminaría", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
         }
     }
 }

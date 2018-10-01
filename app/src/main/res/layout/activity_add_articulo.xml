@@ -28,25 +28,31 @@
 
         <EditText
             android:id="@+id/txtModelo"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:ems="10"
             android:hint="@string/add_modelo"
             android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/txtDescripcion"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:ems="10"
+            android:gravity="top|left"
             android:hint="@string/add_descripcion"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
+            android:scrollbars="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtModelo" />
 
@@ -78,7 +84,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/lbl_tech_spec1"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
 
             <EditText
                 android:id="@+id/txtRespuestaEnFrecuencia"
@@ -86,7 +93,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/lbl_tech_spec2"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
 
             <EditText
                 android:id="@+id/txtParlantes"
@@ -94,7 +102,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/lbl_tech_spec3"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
 
             <EditText
                 android:id="@+id/txtSensibilidad"
@@ -102,7 +111,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/lbl_tech_spec4"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
 
             <EditText
                 android:id="@+id/txtCapacidadDePotencia"
@@ -110,7 +120,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/lbl_tech_spec5"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
 
             <EditText
                 android:id="@+id/txtImpedancia"
@@ -118,7 +129,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/lbl_tech_spec6"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
 
             <EditText
                 android:id="@+id/txtGabinete"
@@ -126,7 +138,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/lbl_tech_spec7"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
 
             <EditText
                 android:id="@+id/txtTerminacion"
@@ -134,7 +147,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/lbl_tech_spec8"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
 
             <EditText
                 android:id="@+id/txtRejaDeProteccion"
@@ -142,7 +156,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/lbl_tech_spec9"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
 
             <EditText
                 android:id="@+id/txtAnclajes"
@@ -150,7 +165,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/lbl_tech_spec10"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
 
             <EditText
                 android:id="@+id/txtConectores"
@@ -158,7 +174,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/lbl_tech_spec11"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
 
             <EditText
                 android:id="@+id/txtDimensiones"
@@ -166,7 +183,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/lbl_tech_spec12"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
 
             <EditText
                 android:id="@+id/txtPeso"
@@ -174,7 +192,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/lbl_tech_spec13"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
