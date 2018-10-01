@@ -39,6 +39,7 @@ public class ListViewActivity extends AppCompatActivity
     ListView listView;
     public SQLiteDatabase db;
     public FloatingActionButton btnFloating;
+    private AdaptadorArticulos adaptador;
 
     List<Articulo> listViewItems;
 
@@ -62,7 +63,7 @@ public class ListViewActivity extends AppCompatActivity
 
         // Bajo de la base los datos para la listview
         prepareListData();
-        AdaptadorArticulos adaptador = new AdaptadorArticulos(this, listViewItems);
+        adaptador = new AdaptadorArticulos(this, listViewItems);
 
         // Cargo el adaptador al listView
         listView.setAdapter(adaptador);
@@ -194,7 +195,12 @@ public class ListViewActivity extends AppCompatActivity
                 Toast.makeText(this, "Se modificaria", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.ctxEliminar:
-                Toast.makeText(this, "Se eliminaría", Toast.LENGTH_SHORT).show();
+                // Lo borro de la base
+                String selection = DBStructure.Table_Productos.COLUMN_NAME_MODELO + " LIKE ?";
+                String[] selectionArgs = {((Articulo)listView.getItemAtPosition(info.position)).getArticulo()};
+                db.delete(DBStructure.Table_Productos.TABLE_NAME, selection, selectionArgs);
+                // Lo borro del adaptador
+                adaptador.remove((Articulo) listView.getItemAtPosition(info.position));
                 return true;
             default:
                 return super.onContextItemSelected(item);
