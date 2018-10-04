@@ -67,10 +67,6 @@ public class TechSpecsFragment extends Fragment
         lblDimensiones = v.findViewById(R.id.lblDimensiones);
         lblPeso = v.findViewById(R.id.lblPeso);
 
-        //Abrimos la base de datos 'DBUsuarios' en modo escritura
-        STSSQLiteHelper helper = new STSSQLiteHelper(getContext());
-
-        SQLiteDatabase db = helper.getWritableDatabase();
         // Columnas que quiero traer
         String[] projection = new String[]{
                 DBStructure.Table_Productos.COLUMN_NAME_MODELO,
@@ -90,7 +86,7 @@ public class TechSpecsFragment extends Fragment
         String selection = DBStructure.Table_Productos.COLUMN_NAME_MODELO + " = ?";
         String[] selectionArgs = {modelo};
 
-        Cursor cursor = db.query(
+        Cursor cursor = ListViewActivity.getDb().query(
                 DBStructure.Table_Productos.TABLE_NAME,   // The table to query
                 projection,             // The array of columns to return (pass null to get all)
                 selection,              // The columns for the WHERE clause

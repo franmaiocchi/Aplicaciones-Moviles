@@ -43,7 +43,7 @@ public class ListViewActivity extends AppCompatActivity
 {
     public Toolbar myToolbar;
     ListView listView;
-    public SQLiteDatabase db;
+    public static SQLiteDatabase db;
     public FloatingActionButton btnFloating;
     private AdaptadorArticulos adaptador;
 
@@ -224,5 +224,9 @@ public class ListViewActivity extends AppCompatActivity
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+    public static SQLiteDatabase getDb()
+    {
+        return db;
     }
 }

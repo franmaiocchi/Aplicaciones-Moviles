@@ -29,7 +29,6 @@ public class AddArticuloActivity extends AppCompatActivity
     public EditText txtDimensiones;
     public EditText txtPeso;
     public Button btnAniadir;
-    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,10 +52,6 @@ public class AddArticuloActivity extends AppCompatActivity
         txtDimensiones = findViewById(R.id.txtDimensiones);
         txtPeso = findViewById(R.id.txtPeso);
         btnAniadir = findViewById(R.id.btnAniadir);
-
-        //Abrimos la base de datos 'DBUsuarios' en modo escritura
-        STSSQLiteHelper helper = new STSSQLiteHelper(this);
-        db = helper.getWritableDatabase();
 
         Intent intent = getIntent();
         final String modelo = intent.getExtras().getString("MODELO");
@@ -87,7 +82,7 @@ public class AddArticuloActivity extends AppCompatActivity
             String selection = DBStructure.Table_Productos.COLUMN_NAME_MODELO + " = ?";
             String[] selectionArgs = {modelo};
 
-            Cursor cursor = db.query(
+            Cursor cursor = ListViewActivity.getDb().query(
                     DBStructure.Table_Productos.TABLE_NAME,   // The table to query
                     projection,             // The array of columns to return (pass null to get all)
                     selection,              // The columns for the WHERE clause
@@ -144,13 +139,13 @@ public class AddArticuloActivity extends AppCompatActivity
                 {
                     values.put(DBStructure.Table_Productos.COLUMN_NAME_IMAGEN, R.drawable.sts);
                     values.put(DBStructure.Table_Productos.COLUMN_NAME_ICON, R.mipmap.ic_sts);
-                    db.insert(DBStructure.Table_Productos.TABLE_NAME, null, values);
+                    ListViewActivity.getDb().insert(DBStructure.Table_Productos.TABLE_NAME, null, values);
                 }
                 else
                 {
                     String selection = DBStructure.Table_Productos.COLUMN_NAME_MODELO + " = ?";
                     String[] selectionArgs = {modelo};
-                    db.update(DBStructure.Table_Productos.TABLE_NAME, values, selection, selectionArgs);
+                    ListViewActivity.getDb().update(DBStructure.Table_Productos.TABLE_NAME, values, selection, selectionArgs);
                 }
                 startActivity(new Intent(AddArticuloActivity.this, ListViewActivity.class));
             }
