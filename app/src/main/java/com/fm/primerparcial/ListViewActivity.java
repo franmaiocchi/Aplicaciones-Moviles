@@ -112,7 +112,9 @@ public class ListViewActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                startActivity(new Intent(ListViewActivity.this, AddArticuloActivity.class));
+                Intent intent = new Intent(ListViewActivity.this, AddArticuloActivity.class);
+                intent.putExtra("MODELO", "@@##$$%%&&//(())==qk");
+                startActivity(intent);
             }
         });
     }
@@ -164,16 +166,6 @@ public class ListViewActivity extends AppCompatActivity
             lblNombre.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
             return(v);
         }
-
-        @Override
-        public Articulo getItem(int position)
-        {
-            return super.getItem(position);
-        }
-        public String getNombreArticulo(int position)
-        {
-            return super.getItem(position).getArticulo();
-        }
     }
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
@@ -188,12 +180,14 @@ public class ListViewActivity extends AppCompatActivity
     @Override
     public boolean onContextItemSelected(final MenuItem item)
     {
+        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.ctxModificar:
-                Toast.makeText(this, "Se modificaria", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ListViewActivity.this, AddArticuloActivity.class);
+                intent.putExtra("MODELO", ((Articulo)listView.getItemAtPosition(info.position)).getArticulo());
+                startActivity(intent);
                 return true;
             case R.id.ctxEliminar:
-                final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
                 new FancyAlertDialog.Builder(this)
                         .setTitle(((Articulo)listView.getItemAtPosition(info.position)).getArticulo())
                         .setBackgroundColor(Color.parseColor("#EB2229"))  //Don't pass R.color.colorvalue

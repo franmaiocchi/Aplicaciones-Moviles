@@ -2,6 +2,7 @@ package com.fm.primerparcial;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class AddArticuloActivity extends AppCompatActivity
     public EditText txtDimensiones;
     public EditText txtPeso;
     public Button btnAniadir;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,46 +54,105 @@ public class AddArticuloActivity extends AppCompatActivity
         txtPeso = findViewById(R.id.txtPeso);
         btnAniadir = findViewById(R.id.btnAniadir);
 
+        //Abrimos la base de datos 'DBUsuarios' en modo escritura
+        STSSQLiteHelper helper = new STSSQLiteHelper(this);
+        db = helper.getWritableDatabase();
+
+        Intent intent = getIntent();
+        final String modelo = intent.getExtras().getString("MODELO");
+        if (modelo.equals("@@##$$%%&&//(())==qk"))
+        {
+
+        }
+        else
+        {
+            btnAniadir.setText("Modificar");
+            // Columnas que quiero traer
+            String[] projection = new String[]{
+                    DBStructure.Table_Productos.COLUMN_NAME_MODELO,
+                    DBStructure.Table_Productos.COLUMN_NAME_DESCRIPCION,
+                    DBStructure.Table_Productos.COLUMN_NAME_TIPO,
+                    DBStructure.Table_Productos.COLUMN_NAME_RESPUESTA_EN_FRECUENCIA,
+                    DBStructure.Table_Productos.COLUMN_NAME_PARLANTES,
+                    DBStructure.Table_Productos.COLUMN_NAME_SENSIBILIDAD,
+                    DBStructure.Table_Productos.COLUMN_NAME_CAPACIDAD_DE_POTENCIA,
+                    DBStructure.Table_Productos.COLUMN_NAME_IMPEDANCIA,
+                    DBStructure.Table_Productos.COLUMN_NAME_GABINETE,
+                    DBStructure.Table_Productos.COLUMN_NAME_TERMINACION,
+                    DBStructure.Table_Productos.COLUMN_NAME_REJA_DE_PROTECCION,
+                    DBStructure.Table_Productos.COLUMN_NAME_ANCLAJES,
+                    DBStructure.Table_Productos.COLUMN_NAME_CONECTORES,
+                    DBStructure.Table_Productos.COLUMN_NAME_DIMENSIONES,
+                    DBStructure.Table_Productos.COLUMN_NAME_PESO};
+            String selection = DBStructure.Table_Productos.COLUMN_NAME_MODELO + " = ?";
+            String[] selectionArgs = {modelo};
+
+            Cursor cursor = db.query(
+                    DBStructure.Table_Productos.TABLE_NAME,   // The table to query
+                    projection,             // The array of columns to return (pass null to get all)
+                    selection,              // The columns for the WHERE clause
+                    selectionArgs,          // The values for the WHERE clause
+                    null,                   // don't group the rows
+                    null,                   // don't filter by row groups
+                    null               // The sort order
+            );
+            if(cursor.moveToFirst())
+            {
+                txtModelo.setText(cursor.getString(0));
+                txtDescripcion.setText(cursor.getString(1));
+                txtTipo.setText(cursor.getString(2));
+                txtRespuestaEnFrecuencia.setText(cursor.getString(3));
+                txtParlantes.setText(cursor.getString(4));
+                txtSensibilidad.setText(cursor.getString(5));
+                txtCapacidadDePotencia.setText(cursor.getString(6));
+                txtImpedancia.setText(cursor.getString(7));
+                txtGabinete.setText(cursor.getString(8));
+                txtTerminacion.setText(cursor.getString(9));
+                txtRejaDeProteccion.setText(cursor.getString(10));
+                txtAnclajes.setText(cursor.getString(11));
+                txtConectores.setText(cursor.getString(12));
+                txtDimensiones.setText(cursor.getString(13));
+                txtPeso.setText(cursor.getString(14));
+            }
+        }
+
         btnAniadir.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                if (txtModelo.getText().equals(""))
+                // Creo el contendedor para insertar los datos a cada tabla
+                ContentValues values = new ContentValues();
+
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_MODELO, txtModelo.getText().toString());
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_DESCRIPCION, txtDescripcion.getText().toString());
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_TIPO, txtTipo.getText().toString());
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_RESPUESTA_EN_FRECUENCIA, txtRespuestaEnFrecuencia.getText().toString());
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_PARLANTES, txtParlantes.getText().toString());
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_SENSIBILIDAD, txtSensibilidad.getText().toString());
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_CAPACIDAD_DE_POTENCIA, txtCapacidadDePotencia.getText().toString());
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_IMPEDANCIA, txtImpedancia.getText().toString());
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_GABINETE, txtGabinete.getText().toString());
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_TERMINACION, txtGabinete.getText().toString());
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_REJA_DE_PROTECCION, txtRejaDeProteccion.getText().toString());
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_ANCLAJES, txtAnclajes.getText().toString());
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_CONECTORES, txtConectores.getText().toString());
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_DIMENSIONES, txtDimensiones.getText().toString());
+                values.put(DBStructure.Table_Productos.COLUMN_NAME_PESO, txtPeso.getText().toString());
+
+                if (modelo.equals("@@##$$%%&&//(())==qk"))
                 {
-                    Toast.makeText(AddArticuloActivity.this, "Complete el campo modelo", Toast.LENGTH_SHORT).show();
+                    values.put(DBStructure.Table_Productos.COLUMN_NAME_IMAGEN, R.drawable.sts);
+                    values.put(DBStructure.Table_Productos.COLUMN_NAME_ICON, R.mipmap.ic_sts);
+                    db.insert(DBStructure.Table_Productos.TABLE_NAME, null, values);
                 }
                 else
                 {
-                    // Creo el contendedor para insertar los datos a cada tabla
-                    ContentValues values = new ContentValues();
-
-                    //Abrimos la base de datos 'DBUsuarios' en modo escritura
-                    STSSQLiteHelper helper = new STSSQLiteHelper(v.getContext());
-
-                    SQLiteDatabase db = helper.getWritableDatabase();
-
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_MODELO, txtModelo.getText().toString());
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_ICON, R.mipmap.ic_sts);
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_IMAGEN, R.drawable.sts);
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_DESCRIPCION, txtDescripcion.getText().toString());
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_TIPO, txtTipo.getText().toString());
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_RESPUESTA_EN_FRECUENCIA, txtRespuestaEnFrecuencia.getText().toString());
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_PARLANTES, txtParlantes.getText().toString());
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_SENSIBILIDAD, txtSensibilidad.getText().toString());
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_CAPACIDAD_DE_POTENCIA, txtCapacidadDePotencia.getText().toString());
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_IMPEDANCIA, txtImpedancia.getText().toString());
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_GABINETE, txtGabinete.getText().toString());
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_TERMINACION, txtGabinete.getText().toString());
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_REJA_DE_PROTECCION, txtRejaDeProteccion.getText().toString());
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_ANCLAJES, txtAnclajes.getText().toString());
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_CONECTORES, txtConectores.getText().toString());
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_DIMENSIONES, txtDimensiones.getText().toString());
-                    values.put(DBStructure.Table_Productos.COLUMN_NAME_PESO, txtPeso.getText().toString());
-                    db.insert(DBStructure.Table_Productos.TABLE_NAME, null, values);
-
-                    startActivity(new Intent(AddArticuloActivity.this, ListViewActivity.class));
+                    String selection = DBStructure.Table_Productos.COLUMN_NAME_MODELO + " = ?";
+                    String[] selectionArgs = {modelo};
+                    db.update(DBStructure.Table_Productos.TABLE_NAME, values, selection, selectionArgs);
                 }
+                startActivity(new Intent(AddArticuloActivity.this, ListViewActivity.class));
             }
         });
     }
