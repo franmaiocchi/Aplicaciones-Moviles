@@ -147,7 +147,9 @@ public class AddArticuloActivity extends AppCompatActivity
                     String[] selectionArgs = {modelo};
                     ListViewActivity.getDb().update(DBStructure.Table_Productos.TABLE_NAME, values, selection, selectionArgs);
                 }
-                startActivity(new Intent(AddArticuloActivity.this, ListViewActivity.class));
+                Intent intent = new Intent(AddArticuloActivity.this, ListViewActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
     }
