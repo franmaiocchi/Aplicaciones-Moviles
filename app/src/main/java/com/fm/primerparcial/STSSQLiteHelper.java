@@ -20,9 +20,17 @@ public class STSSQLiteHelper extends SQLiteOpenHelper
         // Creo el contendedor para insertar los datos a cada tabla
         ContentValues values = new ContentValues();
 
-        // Creo la primer tabla
+        // Creo las tablas
         db.execSQL(DBStructure.Table_Productos.SQL_CREATE_ENTRIES);
+        db.execSQL(DBStructure.Table_Usuarios.SQL_CREATE_ENTRIES);
 
+        // Lleno la tabla de usuarios
+        values.put(DBStructure.Table_Usuarios.COLUMN_NAME_USUARIO, "admin");
+        values.put(DBStructure.Table_Usuarios.COLUMN_NAME_CONTRASEÑA, "admin");
+        db.insert(DBStructure.Table_Usuarios.TABLE_NAME, null, values);
+        values.clear();
+
+        // Lleno la tabla de productos
         values.put(DBStructure.Table_Productos.COLUMN_NAME_MODELO, "Coax12");
         values.put(DBStructure.Table_Productos.COLUMN_NAME_ICON, R.mipmap.ic_coax12);
         values.put(DBStructure.Table_Productos.COLUMN_NAME_IMAGEN, R.drawable.coax12);

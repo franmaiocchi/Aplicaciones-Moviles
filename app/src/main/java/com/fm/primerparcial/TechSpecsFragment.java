@@ -92,7 +92,7 @@ public class TechSpecsFragment extends Fragment
         String selection = DBStructure.Table_Productos.COLUMN_NAME_MODELO + " = ?";
         String[] selectionArgs = {modelo};
 
-        Cursor cursor = ListViewActivity.getDb().query(
+        Cursor cursor = SplashActivity.getDb().query(
                 DBStructure.Table_Productos.TABLE_NAME,   // The table to query
                 projection,             // The array of columns to return (pass null to get all)
                 selection,              // The columns for the WHERE clause

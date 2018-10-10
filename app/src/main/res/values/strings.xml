@@ -3,6 +3,7 @@
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="boton_login">LOGIN</string>
+    <string name="boton_register">REGISTRATE</string>
     <string name="lbl_login">LOGIN</string>
     <string name="tlb_settings">Settings</string>
     <string name="tlb_title">Productos STS</string>

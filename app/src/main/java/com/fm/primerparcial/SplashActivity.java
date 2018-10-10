@@ -3,6 +3,7 @@ package com.fm.primerparcial;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
@@ -12,7 +13,8 @@ import java.util.TimerTask;
 
 public class SplashActivity extends Activity
 {
-    private static final long SPLASH_SCREEN_DELAY = 3000;
+    public static SQLiteDatabase db;
+    private static final long SPLASH_SCREEN_DELAY = 2500;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -33,5 +35,14 @@ public class SplashActivity extends Activity
         };
         Timer timer = new Timer();
         timer.schedule(task, SPLASH_SCREEN_DELAY);
+
+        //Abrimos la base de datos en modo escritura
+        STSSQLiteHelper helper = new STSSQLiteHelper(this);
+
+        db = helper.getWritableDatabase();
+    }
+    public static SQLiteDatabase getDb()
+    {
+        return db;
     }
 }

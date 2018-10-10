@@ -82,7 +82,7 @@ public class AddArticuloActivity extends AppCompatActivity
             String selection = DBStructure.Table_Productos.COLUMN_NAME_MODELO + " = ?";
             String[] selectionArgs = {modelo};
 
-            Cursor cursor = ListViewActivity.getDb().query(
+            Cursor cursor = SplashActivity.getDb().query(
                     DBStructure.Table_Productos.TABLE_NAME,   // The table to query
                     projection,             // The array of columns to return (pass null to get all)
                     selection,              // The columns for the WHERE clause
@@ -139,13 +139,13 @@ public class AddArticuloActivity extends AppCompatActivity
                 {
                     values.put(DBStructure.Table_Productos.COLUMN_NAME_IMAGEN, R.drawable.sts);
                     values.put(DBStructure.Table_Productos.COLUMN_NAME_ICON, R.mipmap.ic_sts);
-                    ListViewActivity.getDb().insert(DBStructure.Table_Productos.TABLE_NAME, null, values);
+                    SplashActivity.getDb().insert(DBStructure.Table_Productos.TABLE_NAME, null, values);
                 }
                 else
                 {
                     String selection = DBStructure.Table_Productos.COLUMN_NAME_MODELO + " = ?";
                     String[] selectionArgs = {modelo};
-                    ListViewActivity.getDb().update(DBStructure.Table_Productos.TABLE_NAME, values, selection, selectionArgs);
+                    SplashActivity.getDb().update(DBStructure.Table_Productos.TABLE_NAME, values, selection, selectionArgs);
                 }
                 Intent intent = new Intent(AddArticuloActivity.this, ListViewActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

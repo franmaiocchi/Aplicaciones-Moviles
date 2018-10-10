@@ -14,7 +14,20 @@ public class DBStructure
     // Constructor
     private DBStructure() {}
 
+    public static class Table_Usuarios implements BaseColumns
+    {
+        public static final String TABLE_NAME = "Usuarios";
+        public static final String COLUMN_NAME_USUARIO = "usuario";
+        public static final String COLUMN_NAME_CONTRASEÑA = "contraseña";
 
+        public static final String SQL_CREATE_ENTRIES =
+                "CREATE TABLE " + TABLE_NAME + " (" +
+                        COLUMN_NAME_USUARIO + " TEXT," +
+                        COLUMN_NAME_CONTRASEÑA + " TEXT)";
+
+        public static final String SQL_DELETE_ENTRIES =
+                "DROP TABLE IF EXISTS " + TABLE_NAME;
+    }
     // Clase interna para definir la tabla
     public static class Table_Productos implements BaseColumns
     {

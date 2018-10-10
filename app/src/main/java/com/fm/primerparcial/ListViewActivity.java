@@ -48,7 +48,6 @@ public class ListViewActivity extends AppCompatActivity
 {
     public Toolbar myToolbar;
     ListView listView;
-    public static SQLiteDatabase db;
     public FloatingActionButton btnFloating;
     private AdaptadorArticulos adaptador;
 
@@ -106,7 +105,9 @@ public class ListViewActivity extends AppCompatActivity
                         startActivity(new Intent(ListViewActivity.this, SettingsActivity.class));
                         break;
                     case R.id.tlb_add:
-                        Toast.makeText(ListViewActivity.this, "Aprete el boton add", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(ListViewActivity.this, AddArticuloActivity.class);
+                        intent.putExtra("MODELO", "@@##$$%%&&//(())==qk");
+                        startActivity(intent);
                         break;
                 }
                 return true;
@@ -135,14 +136,10 @@ public class ListViewActivity extends AppCompatActivity
     {
         listViewItems = new ArrayList<Articulo>();
 
-        //Abrimos la base de datos 'DBUsuarios' en modo escritura
-        STSSQLiteHelper helper = new STSSQLiteHelper(this);
-
-        db = helper.getWritableDatabase();
         // Columnas que quiero traer
         String[] projection = new String[]{DBStructure.Table_Productos.COLUMN_NAME_MODELO, DBStructure.Table_Productos.COLUMN_NAME_ICON};
 
-        Cursor cursor = db.query(DBStructure.Table_Productos.TABLE_NAME, projection, null, null, null, null, null);
+        Cursor cursor = SplashActivity.getDb().query(DBStructure.Table_Productos.TABLE_NAME, projection, null, null, null, null, null);
         if(cursor.moveToFirst())
         {
             do
@@ -226,7 +223,7 @@ public class ListViewActivity extends AppCompatActivity
                                 // Lo borro de la base
                                 String selection = DBStructure.Table_Productos.COLUMN_NAME_MODELO + " LIKE ?";
                                 String[] selectionArgs = {((Articulo)listView.getItemAtPosition(info.position)).getArticulo()};
-                                db.delete(DBStructure.Table_Productos.TABLE_NAME, selection, selectionArgs);
+                                SplashActivity.getDb().delete(DBStructure.Table_Productos.TABLE_NAME, selection, selectionArgs);
                                 Toast.makeText(getApplicationContext(),((Articulo)listView.getItemAtPosition(info.position)).getArticulo() + " eliminado",Toast.LENGTH_SHORT).show();
                                 // Lo borro del adaptador
                                 adaptador.remove((Articulo) listView.getItemAtPosition(info.position));
@@ -244,9 +241,5 @@ public class ListViewActivity extends AppCompatActivity
             default:
                 return super.onContextItemSelected(item);
         }
-    }
-    public static SQLiteDatabase getDb()
-    {
-        return db;
     }
 }
