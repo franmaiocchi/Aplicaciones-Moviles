@@ -18,4 +18,19 @@
         <item>#00FF00</item>
         <item>#FF6085</item>
     </string-array>
+    <string-array name="Tamanios">
+        <item>Diminuto</item>
+        <item>Pequeño</item>
+        <item>Normal</item>
+        <item>Grande</item>
+        <item>Enorme</item>
+    </string-array>
+    <string-array name="TamaniosValue">
+        <item>12</item>
+        <item>14</item>
+        <item>18</item>
+        <item>20</item>
+        <item>24</item>
+    </string-array>
+
 </resources>

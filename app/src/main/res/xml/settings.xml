@@ -3,18 +3,17 @@
 
     <PreferenceCategory android:title="Tipografía">
         <CheckBoxPreference
-            android:key="cursiva"
-            android:title="Cursiva"
-            android:summary="Cambie el tipo de letra a cursiva" />
-        <CheckBoxPreference
             android:key="bold"
+            android:defaultValue="false"
             android:title="Bold"
             android:summary="Cambie el tipo de letra a negrita" />
-        <EditTextPreference
-            android:key="tamaño"
+        <ListPreference
+            android:key="tamanio"
             android:title="Tamaño"
             android:summary="Cambie el tamaño de letra"
-            android:dialogTitle="Ingrese el tamaño de letra deseado" />
+            android:dialogTitle="Seleccione el tamaño de letra deseado"
+            android:entries="@array/Tamanios"
+            android:entryValues="@array/TamaniosValue" />
         <ListPreference
             android:key="color"
             android:title="Color"

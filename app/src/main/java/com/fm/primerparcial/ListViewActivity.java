@@ -3,16 +3,21 @@ package com.fm.primerparcial;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -61,7 +66,8 @@ public class ListViewActivity extends AppCompatActivity
         btnFloating = findViewById(R.id.btnFloating);
 
         // Cambio el color del boton
-        btnFloating.setBackgroundColor(getResources().getColor(R.color.stsPDark));
+        //btnFloating.setBackgroundColor(getResources().getColor(R.color.stsPDark));
+        btnFloating.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#AF0000")));
 
         // Seteo la toolbar
         setSupportActionBar(myToolbar);
@@ -119,6 +125,12 @@ public class ListViewActivity extends AppCompatActivity
         });
     }
 
+    protected void onResume()
+    {
+        super.onResume();
+        adaptador.notifyDataSetChanged();
+    }
+
     private void prepareListData()
     {
         listViewItems = new ArrayList<Articulo>();
@@ -147,6 +159,7 @@ public class ListViewActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
     }
+
     class AdaptadorArticulos extends ArrayAdapter<Articulo>
     {
         private List<Articulo> _datos;
@@ -164,6 +177,13 @@ public class ListViewActivity extends AppCompatActivity
             TextView lblNombre = (TextView)v.findViewById(R.id.lblListItem);
             lblNombre.setText(this._datos.get(position).getArticulo());
             lblNombre.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+            if (sharedPref.getBoolean("bold", false) == true)
+            {
+                lblNombre.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+            }
+            lblNombre.setTextColor(Color.parseColor(sharedPref.getString("color", "#000000")));
+            lblNombre.setTextSize(TypedValue.COMPLEX_UNIT_SP, Float.parseFloat(sharedPref.getString("tamanio", "18")));
             return(v);
         }
     }
