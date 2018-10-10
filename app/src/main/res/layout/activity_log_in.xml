@@ -45,7 +45,8 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/btnloginshape"
         android:text="@string/boton_login"
-        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textColor="#050505"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
@@ -60,7 +61,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="casual"
         android:text="@string/lbl_login"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/stsPrimary"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
