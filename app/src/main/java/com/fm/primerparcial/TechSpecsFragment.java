@@ -1,10 +1,16 @@
 package com.fm.primerparcial;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,6 +117,34 @@ public class TechSpecsFragment extends Fragment
             lblDimensiones.setText(cursor.getString(12));
             lblPeso.setText(cursor.getString(13));
         }
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        setTextAppearence(v,
+                sharedPref.getBoolean("bold", false),
+                Color.parseColor(sharedPref.getString("color", "#000000")),
+                Float.parseFloat(sharedPref.getString("tamanio", "18")));
         return v;
+    }
+    private void setTextAppearence(final View v, boolean bold, int color, float size)
+    {
+        try
+        {
+            if (v instanceof ViewGroup)
+            {
+                ViewGroup vg = (ViewGroup) v;
+                for (int i = 0; i < vg.getChildCount(); i++)
+                {
+                    View child = vg.getChildAt(i);
+                    setTextAppearence(child, bold, color, size);
+                }
+            }
+            else if (v instanceof TextView )
+            {
+                ((TextView) v).setTextColor(color);
+                ((TextView) v).setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
+            }
+        }
+        catch (Exception e)
+        {
+        }
     }
 }
