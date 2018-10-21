@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".AddArticuloActivity">
+
+        <Button
+            android:id="@+id/btnAniadir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Añadir"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <EditText
+            android:id="@+id/txtModelo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="@string/add_modelo"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/txtDescripcion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:gravity="top|left"
+            android:hint="@string/add_descripcion"
+            android:inputType="textMultiLine"
+            android:scrollbars="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtModelo" />
+
+        <TextView
+            android:id="@+id/lblTechSpecs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Especificaciones técnicas"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtDescripcion" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblTechSpecs">
+
+            <EditText
+                android:id="@+id/txtTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/lbl_tech_spec1"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+
+            <EditText
+                android:id="@+id/txtRespuestaEnFrecuencia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/lbl_tech_spec2"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+
+            <EditText
+                android:id="@+id/txtParlantes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/lbl_tech_spec3"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+
+            <EditText
+                android:id="@+id/txtSensibilidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/lbl_tech_spec4"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+
+            <EditText
+                android:id="@+id/txtCapacidadDePotencia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/lbl_tech_spec5"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+
+            <EditText
+                android:id="@+id/txtImpedancia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/lbl_tech_spec6"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+
+            <EditText
+                android:id="@+id/txtGabinete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/lbl_tech_spec7"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+
+            <EditText
+                android:id="@+id/txtTerminacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/lbl_tech_spec8"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+
+            <EditText
+                android:id="@+id/txtRejaDeProteccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/lbl_tech_spec9"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+
+            <EditText
+                android:id="@+id/txtAnclajes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/lbl_tech_spec10"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+
+            <EditText
+                android:id="@+id/txtConectores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/lbl_tech_spec11"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+
+            <EditText
+                android:id="@+id/txtDimensiones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/lbl_tech_spec12"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+
+            <EditText
+                android:id="@+id/txtPeso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/lbl_tech_spec13"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

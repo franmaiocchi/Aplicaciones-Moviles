@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Tipografía">
+        <CheckBoxPreference
+            android:key="bold"
+            android:defaultValue="false"
+            android:title="Bold"
+            android:summary="Cambie el tipo de letra a negrita" />
+        <ListPreference
+            android:key="tamanio"
+            android:title="Tamaño"
+            android:summary="Cambie el tamaño de letra"
+            android:dialogTitle="Seleccione el tamaño de letra deseado"
+            android:entries="@array/Tamanios"
+            android:entryValues="@array/TamaniosValue" />
+        <ListPreference
+            android:key="color"
+            android:title="Color"
+            android:summary="Seleccione el color de la letra"
+            android:dialogTitle="Seleccione el color"
+            android:entries="@array/Colores"
+            android:entryValues="@array/ColoresValue" />
+    </PreferenceCategory>
+</PreferenceScreen>
